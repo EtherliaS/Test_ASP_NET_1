@@ -1,0 +1,40 @@
+# Spec file options
+basepath: ..
+outdir: bin
+
+# Common directory variables
+ETCDIR = etc/myapp
+OPTDIR = opt/myapp
+
+# Package control file
+package: myapp
+version: 1.2
+architecture: all
+depends: mono-runtime, libmono-system-runtime4.0-cil, libmono-system4.0-cil
+depends: libmono-sqlite4.0-cil, libmono-system-data4.0-cil
+maintainer: Example Developer <developer@example.com>
+homepage: https://example.com/myapp
+description: My application
+ My application can do truly miraculous things, read the user's mind and works
+ perfectly in every aspect.
+ .
+ If you ever wanted your computer to understand you and be helpful, then this
+ little tool is all you need.
+
+# Maintenance scripts
+preinst:  Setup\Linux\preinst    text
+postinst: Setup\Linux\postinst   text
+prerm:    Setup\Linux\prerm      text
+postrm:   Setup\Linux\postrm     text
+
+# Startup scripts and configuration
+file:     Setup\Linux\myapp                    etc/init.d/   755
+conffile: Setup\Config\Linux\myapp.cfg         {ETCDIR}/     text
+
+# Application files
+file:     MyApp\bin\Release\MyApp.exe          {OPTDIR}/     755
+file:     MyApp\bin\Release\MyApp.exe.config   {OPTDIR}/
+file:     MyLib\bin\Release\MyLib.dll          {OPTDIR}/
+
+# Create log directory
+dir:                                           var/log/myapp
